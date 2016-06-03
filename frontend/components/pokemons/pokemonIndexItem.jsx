@@ -1,12 +1,18 @@
 var React = require('react');
 
 var PokemonIndexItem = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+  showDetail: function() {
+    this.context.router.push('pokemon/' + this.props.pokemon.id)
+  },
   render: function() {
     return(
-      <div className='poke-list-item'>
+      <li className='poke-list-item' onClick={ this.showDetail }>
         <p>Name: { this.props.pokemon.name }</p>
         <p>Poke Type: { this.props.pokemon.poke_type }</p>
-      </div>
+      </li>
     )
   }
 })

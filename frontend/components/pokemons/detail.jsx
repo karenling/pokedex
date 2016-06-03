@@ -3,16 +3,13 @@ var PokemonStore = require('../../stores/pokemon');
 var ClientActions = require('../../actions/clientActions');
 
 var PokemonDetail = React.createClass({
-  getStateFromStore: function() {
+  getInitialState: function() {
     return {
       pokemon: PokemonStore.findById(this.props.params.pokemonId)
     }
   },
-  getInitialState: function() {
-    return this.getStateFromStore();
-  },
   _onChange: function() {
-    this.setState(this.getStateFromStore());
+    this.setState({ pokemon: PokemonStore.findById(this.props.params.pokemonId) });
   },
   componentDidMount: function() {
     PokemonStore.addListener(this._onChange);
@@ -20,6 +17,9 @@ var PokemonDetail = React.createClass({
   },
   componentWillUnmount: function() {
     PokemonStore.removeListener(this._onChange);
+  },
+  componentWillReceiveProps: function() {
+    ClientActions.fetchOnePokemon(this.props.params.pokemonId);
   },
   render: function() {
     // handle before pokemon is fetched

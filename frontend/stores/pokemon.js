@@ -18,6 +18,7 @@ PokemonStore.__onDispatch = function(payload) {
       PokemonStore.__emitChange();
       break;
     case PokemonConstants.POKEMON_RECEIVED:
+      resetPokemon(payload.pokemon);
       PokemonStore.__emitChange();
       break;
   }
@@ -32,6 +33,10 @@ var resetPokemons = function(pokemons) {
   pokemons.forEach(function(pokemon) {
     _pokemons[pokemon.id] = pokemon;
   });
+};
+
+var resetPokemon = function(pokemon) {
+  _pokemons[pokemon.id] = pokemon;
 };
 
 module.exports = PokemonStore;
