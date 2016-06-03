@@ -17,7 +17,14 @@ PokemonStore.__onDispatch = function(payload) {
       resetPokemons(payload.pokemons);
       PokemonStore.__emitChange();
       break;
+    case PokemonConstants.POKEMON_RECEIVED:
+      PokemonStore.__emitChange();
+      break;
   }
+};
+
+PokemonStore.findById = function(id) {
+  return _pokemons[id]
 };
 
 var resetPokemons = function(pokemons) {
