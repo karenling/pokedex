@@ -15,11 +15,11 @@ var PokemonsIndex = React.createClass({
     });
   },
   componentDidMount: function() {
-    PokemonStore.addListener(this._onChange)
+    this.listener = PokemonStore.addListener(this._onChange)
     ClientActions.fetchAllPokemons();
   },
   componentWillUnmount: function() {
-    PokemonStore.remove(this._onChange);
+    this.listener.remove();
   },
   render: function() {
     return(

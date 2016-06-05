@@ -1,6 +1,7 @@
 var React = require('react');
 var PokemonStore = require('../../stores/pokemon');
 var ClientActions = require('../../actions/clientActions');
+var ToysIndex = require('./toysIndex');
 
 var PokemonDetail = React.createClass({
   getInitialState: function() {
@@ -12,11 +13,11 @@ var PokemonDetail = React.createClass({
     this.setState({ pokemon: PokemonStore.findById(this.props.params.pokemonId) });
   },
   componentDidMount: function() {
-    PokemonStore.addListener(this._onChange);
+    this.listener = PokemonStore.addListener(this._onChange);
     ClientActions.fetchOnePokemon(this.props.params.pokemonId);
   },
   componentWillUnmount: function() {
-    PokemonStore.removeListener(this._onChange);
+    this.listener.remove();
   },
   componentWillReceiveProps: function() {
     ClientActions.fetchOnePokemon(this.props.params.pokemonId);
@@ -39,8 +40,9 @@ var PokemonDetail = React.createClass({
             <p>Moves: { this.state.pokemon.moves }</p>
             <p>Type: { this.state.pokemon.poke_type }</p>
           </div>
+          <ToysIndex toys={ this.state.pokemon.toys }></ToysIndex>
         </div>
-
+        { this.props.children }
       </div>
     )
   }
