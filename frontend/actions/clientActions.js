@@ -6,6 +6,9 @@ var clientActions = {
   },
   fetchOnePokemon: function(id) {
     ApiUtil.fetchOnePokemon(id);
+  },
+  createPokemon: function(attrs, callback) {
+    ApiUtil.createPokemon(attrs, callback);
   }
 };
 
