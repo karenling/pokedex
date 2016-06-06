@@ -1,7 +1,7 @@
 var React = require('react');
 var PokemonStore = require('../../stores/pokemon');
 var ClientActions = require('../../actions/clientActions');
-var ToysIndex = require('./toysIndex');
+var ToysIndex = require('../toys/index');
 
 var PokemonDetail = React.createClass({
   getInitialState: function() {

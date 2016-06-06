@@ -1,5 +1,5 @@
 var React = require('react');
-var ToyIndexItem = require('./toyIndexItem');
+var ToyIndexItem = require('../toys/indexItem');
 
 var ToysIndex = React.createClass({
   render: function() {
